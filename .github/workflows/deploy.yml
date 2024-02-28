@@ -21,8 +21,8 @@ jobs:
       MONGODB_CONNECTION_PROTOCOL: mongodb #Using the service label 
       # MONGODB_CLUSTER_ADDRESS: mongodb #Using the service label
       MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 #Use this to connect from runner (non-container)
-      MONGODB_USERNAME: root
-      MONGODB_PASSWORD: example
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     services:
       mongodb: #Use instead of external mongodb
@@ -30,8 +30,8 @@ jobs:
         ports: #Use this to connect from runner (non-container)
           - 27017:27017
         env:
-          MONGO_INITDB_ROOT_USERNAME: root
-          MONGO_INITDB_ROOT_PASSWORD: example
+          MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+          MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
     steps:
       - name: Get Code
         uses: actions/checkout@v3
